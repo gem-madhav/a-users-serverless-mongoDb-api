@@ -1,0 +1,118 @@
+openapi: 3.0.0
+
+info:
+  title: myUsersServerlessApp
+  description: A basic users REST API
+  version: 1.0.0
+
+paths:
+  /create-user:
+    post:
+      operationId: createUser
+      description: Create a new user
+      requestBody:
+        content:
+          application/json:  
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string    
+                email:
+                  type: string    
+                phone:
+                  type: number    
+      responses:
+        '200':
+          description: User added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: Could not create the user 
+  /update-user/{id}:
+    put:
+      operationId: updateUser
+      description: Update user of id
+      parameters:
+        - in: path
+          name: id
+          description: User Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:  
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string    
+                email:
+                  type: string    
+                phone:
+                  type: number
+      responses:
+        '200':
+          description: User updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: Could not update user
+  /delete-user/{id}:
+    delete:
+      operationId: deleteUser
+      description: Delete user with id
+      parameters:
+        - in: path
+          name: id
+          description: User Id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User removed
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: Could not delete user
+  /users/{id}:
+    get:
+      operationId: getUser
+      description: Get user of a id
+      parameters:
+        - in: path
+          name: id
+          description: User Id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: Could not fetch the user
+  /users:
+    get:
+      operationId: getUsers
+      description: Get all users
+      responses:
+        '200':
+          description: Users fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+        '500':
+          description: Could not fetch users
